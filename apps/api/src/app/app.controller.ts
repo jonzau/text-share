@@ -1,15 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-
-import { Message } from '@text-share/api-interfaces';
-
 import { AppService } from './app.service';
+import { Text } from './texts/text-model';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('hello')
-  getData(): Message {
+  getData(): Text {
     return this.appService.getData();
   }
 }

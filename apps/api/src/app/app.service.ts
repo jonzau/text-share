@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Message } from '@text-share/api-interfaces';
+import { Text } from './texts/text-model';
 
 @Injectable()
 export class AppService {
-  getData(): Message {
-    return { message: 'Welcome to api!' };
+
+  private readonly cachedTexts = [];
+
+  getData(): Text {
+    return { text: 'Welcome to api!' };
   }
 }
