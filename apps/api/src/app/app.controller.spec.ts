@@ -1,22 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
-
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 
 describe('AppController', () => {
   let app: TestingModule;
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
+      controllers: [AppController]
     }).compile();
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to TextShare!"', () => {
+  describe('test', () => {
+    it('should return "TextShare server up and running!"', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual('Welcome to TextShare!');
+      expect(appController.test()).toEqual('TextShare server up and running!');
     });
   });
 });
