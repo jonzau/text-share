@@ -8,6 +8,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   private readonly ENDPOINT = 'http://localhost:3333/api/test/'
-  test$ = this.http.get(this.ENDPOINT);
+  testMessage$ = this.http.get(this.ENDPOINT, {responseType: 'text'});
   constructor(private http: HttpClient) {}
 }

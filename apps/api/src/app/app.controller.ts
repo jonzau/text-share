@@ -4,7 +4,7 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
 
   @Get('test')
-  test(): { message: string } {
-    return { message: 'TextShare server up and running!' };
+  test(): string {
+    return 'TextShare server up and running!';
   }
 }
