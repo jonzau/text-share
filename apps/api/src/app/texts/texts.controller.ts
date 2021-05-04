@@ -1,35 +1,36 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateTextDto } from './dto/create-text.dto';
-import { Text } from './text-model';
+import { Body, Controller, Delete, Get, Headers, Param, Post, Put } from '@nestjs/common';
 import { TextsService } from './texts.service';
+import { CreateTextDto, TextDto } from '@text-share/api-interfaces';
+import { TextDocument } from './schemas/text.schema';
 
 @Controller('texts')
 export class TextsController {
 
   constructor(private readonly textsService: TextsService) {}
 
+  // TODO: Remove. For development.
   @Get()
-  findAll(): Promise<Text[]> {
+  retrieveAll(): Promise<TextDocument[]> {
     return this.textsService.findAll();
   }
-  
+
   @Get(':id')
-  findOne(@Param('id') id): Promise<Text> {
-    return this.textsService.findOne(id);
+  retrieveText(@Headers('pw') password: string, @Param('id') id): Promise<TextDto> {
+    return this.textsService.findOne(id, password);
   }
 
   @Post()
-  createItem(@Body() createText: CreateTextDto): Promise<Text> {  // TODO: see if 'CreateTextDto' can be replaced with 'Text' (also for update)
+  createText(@Body() createText: CreateTextDto): Promise<TextDto> {
     return this.textsService.create(createText);
   }
 
   @Delete(':id')
-  delete(@Param('id') id): Promise<Text> {
-    return this.textsService.delete(id);
+  delete(@Headers('pw') password: string, @Param('id') id): Promise<TextDto> {
+    return this.textsService.delete(id, password);
   }
   
   @Put(':id')
-  update(@Body() updateIText: CreateTextDto, @Param('id') id): Promise<Text> {
-    return this.textsService.update(id, updateIText);
+  update(@Body() updateIText: CreateTextDto, @Headers('pw') password: string, @Param('id') id): Promise<TextDto> {
+    return this.textsService.update(id, updateIText, password);
   }
 }
