@@ -25,12 +25,12 @@ export class TextsController {
   }
 
   @Delete(':id')
-  delete(@Headers('pw') password: string, @Param('id') id): Promise<TextDto> {
+  deleteText(@Headers('pw') password: string, @Param('id') id): Promise<TextDto> {
     return this.textsService.delete(id, password);
   }
   
   @Put(':id')
-  update(@Body() updateIText: CreateTextDto, @Headers('pw') password: string, @Param('id') id): Promise<TextDto> {
-    return this.textsService.update(id, updateIText, password);
+  updateText(@Body() updateText: CreateTextDto, @Headers('pw') password: string, @Param('id') id): Promise<TextDto> {
+    return this.textsService.update(id, updateText, password);
   }
 }
