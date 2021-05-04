@@ -84,7 +84,7 @@ export class TextsService {
   async create(createText: CreateTextDto): Promise<TextDto> {
     const newText = new this.textModel(createText);
     const createdText = await newText.save();
-    this.updateCache(createdText.id, createdText)
+    this.updateCache(createdText._id, createdText)
     return this.convertToTextDto(createdText, createText.editPassword || createText.readPassword);
   }
   
